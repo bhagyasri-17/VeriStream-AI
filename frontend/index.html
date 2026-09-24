@@ -1,0 +1,3708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VeriStream AI</title>
+
+<style>
+
+/* ============================================================
+   BASE
+============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-main: #020617;
+    --bg-card: rgba(15, 23, 42, 0.76);
+    --border: rgba(148, 163, 184, 0.14);
+
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+
+    --accent: #38bdf8;
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --danger: #fb7185;
+}
+
+body {
+
+    font-family: Inter, Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 12% 8%,
+            rgba(14, 165, 233, 0.12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 18%,
+            rgba(99, 102, 241, 0.10),
+            transparent 26%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(14, 165, 233, 0.06),
+            transparent 35%
+        ),
+        var(--bg-main);
+
+    color: var(--text-main);
+
+    min-height: 100vh;
+}
+
+.container {
+
+    width: min(1440px, 92%);
+    margin: auto;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+header {
+
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+
+    font-size: 24px;
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+}
+
+.logo span {
+
+    color: var(--accent);
+}
+
+.status {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    border:
+        1px solid rgba(34,197,94,0.16);
+
+    border-radius: 999px;
+
+    background:
+        rgba(34,197,94,0.055);
+
+    color: var(--text-muted);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.status-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 12px #22c55e;
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+
+.hero {
+
+    text-align: center;
+
+    padding:
+        58px 20px 42px;
+}
+
+.hero-eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 12px;
+
+    margin-bottom: 18px;
+
+    border:
+        1px solid rgba(56,189,248,0.18);
+
+    border-radius: 999px;
+
+    background:
+        rgba(56,189,248,0.055);
+
+    color: #7dd3fc;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+.hero h1 {
+
+    font-size:
+        clamp(42px, 6vw, 72px);
+
+    line-height: 0.98;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+
+    color: var(--accent);
+}
+
+.hero p {
+
+    max-width: 760px;
+
+    margin: auto;
+
+    color: var(--text-muted);
+
+    font-size: 16px;
+
+    line-height: 1.75;
+}
+
+/* ============================================================
+   DASHBOARD
+============================================================ */
+
+.dashboard {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.12fr)
+        minmax(360px, 0.88fr);
+
+    gap: 20px;
+
+    padding-bottom: 55px;
+}
+
+.card {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,23,42,0.84),
+            rgba(15,23,42,0.62)
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 22px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 24px 70px rgba(0,0,0,0.24),
+        inset 0 1px 0
+        rgba(255,255,255,0.025);
+}
+
+.card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.card-title {
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+.card-subtitle {
+
+    color: var(--text-dim);
+
+    font-size: 11px;
+
+    margin-top: 4px;
+}
+
+/* ============================================================
+   SESSION
+============================================================ */
+
+.session-info {
+
+    margin-bottom: 12px;
+
+    min-height: 38px;
+
+    padding: 10px 13px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(2,6,23,0.38);
+
+    border:
+        1px solid rgba(56,189,248,0.08);
+
+    color: var(--text-dim);
+
+    font-size: 11px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.session-id {
+
+    color: var(--text-muted);
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.session-state {
+
+    color: var(--accent);
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+.camera-wrapper {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background: #000;
+
+    aspect-ratio: 16 / 9;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(255,255,255,0.025);
+}
+
+#video {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transform: scaleX(-1);
+}
+
+#canvas {
+
+    display: none;
+}
+
+.camera-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+.scan-line {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #38bdf8,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px #38bdf8;
+
+    opacity: 0.42;
+
+    animation:
+        scan 4s linear infinite;
+}
+
+@keyframes scan {
+
+    0% {
+        top: 0%;
+    }
+
+    50% {
+        top: 100%;
+    }
+
+    100% {
+        top: 0%;
+    }
+}
+
+.corner {
+
+    position: absolute;
+
+    width: 35px;
+    height: 35px;
+
+    border-color: var(--accent);
+
+    border-style: solid;
+
+    opacity: 0.82;
+}
+
+.corner.tl {
+
+    top: 18px;
+    left: 18px;
+
+    border-width:
+        2px 0 0 2px;
+}
+
+.corner.tr {
+
+    top: 18px;
+    right: 18px;
+
+    border-width:
+        2px 2px 0 0;
+}
+
+.corner.bl {
+
+    bottom: 18px;
+    left: 18px;
+
+    border-width:
+        0 0 2px 2px;
+}
+
+.corner.br {
+
+    bottom: 18px;
+    right: 18px;
+
+    border-width:
+        0 2px 2px 0;
+}
+
+.camera-message {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: var(--text-dim);
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.controls {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 14px;
+}
+
+button {
+
+    flex: 1;
+
+    min-height: 46px;
+
+    padding:
+        14px 20px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.primary-btn {
+
+    background: var(--accent);
+
+    color: #020617;
+
+    box-shadow:
+        0 8px 24px
+        rgba(56,189,248,0.12);
+}
+
+.primary-btn:hover {
+
+    background: #7dd3fc;
+
+    transform:
+        translateY(-1px);
+}
+
+.secondary-btn {
+
+    background:
+        rgba(148,163,184,0.1);
+
+    color: #cbd5e1;
+
+    border:
+        1px solid rgba(148,163,184,0.15);
+}
+
+.secondary-btn:hover {
+
+    background:
+        rgba(148,163,184,0.18);
+}
+
+button:disabled {
+
+    opacity: 0.4;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+/* ============================================================
+   TRUST SCORE
+============================================================ */
+
+.trust-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding:
+        4px 0 16px;
+}
+
+.trust-ring {
+
+    width: 210px;
+    height: 210px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        conic-gradient(
+            var(--accent) 0deg,
+            var(--accent) 0deg,
+            rgba(51,65,85,0.35) 0deg
+        );
+
+    position: relative;
+
+    transition:
+        background 0.5s ease;
+
+    box-shadow:
+        0 0 55px
+        rgba(56,189,248,0.06);
+}
+
+.trust-ring::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 9px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(56,189,248,0.08),
+            transparent 45%
+        ),
+        #07111f;
+}
+
+.trust-content {
+
+    position: relative;
+
+    text-align: center;
+}
+
+.trust-score {
+
+    font-size: 56px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+.trust-percent {
+
+    font-size: 15px;
+
+    color: var(--text-dim);
+}
+
+.trust-label {
+
+    margin-top: 10px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+}
+
+.risk-badge {
+
+    margin-top: 10px;
+
+    padding:
+        8px 16px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    background:
+        rgba(34,197,94,0.12);
+
+    color: var(--success);
+
+    border:
+        1px solid
+        rgba(34,197,94,0.25);
+
+    letter-spacing: 0.7px;
+
+    text-transform: uppercase;
+}
+
+.coverage {
+
+    margin-top: 9px;
+
+    color: var(--text-dim);
+
+    font-size: 10px;
+}
+
+/* ============================================================
+   SIGNALS
+============================================================ */
+
+.signals {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+}
+
+.signal {
+
+    padding: 13px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(2,6,23,0.34);
+
+    border:
+        1px solid
+        rgba(148,163,184,0.08);
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.signal:hover {
+
+    border-color:
+        rgba(56,189,248,0.16);
+
+    transform:
+        translateY(-1px);
+}
+
+.signal:last-child {
+
+    grid-column:
+        1 / -1;
+}
+
+.signal-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+.signal-name {
+
+    color: #cbd5e1;
+
+    font-size: 11px;
+
+    font-weight: 650;
+}
+
+.signal-value {
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.progress {
+
+    height: 5px;
+
+    background:
+        #1e293b;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: 20px;
+
+    background:
+        var(--accent);
+
+    transition:
+        width 0.4s ease;
+}
+
+.signal-status {
+
+    margin-top: 7px;
+
+    min-height: 15px;
+
+    color: var(--text-dim);
+
+    font-size: 9px;
+}
+
+/* ============================================================
+   EXPLAINABLE TRUST REPORT
+============================================================ */
+
+.explanation {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(56,189,248,0.045);
+
+    border:
+        1px solid
+        rgba(56,189,248,0.12);
+}
+
+.explanation-title {
+
+    margin-bottom: 10px;
+
+    color: var(--accent);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.explanation-signals {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.explanation-item {
+
+    padding:
+        10px 12px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(2,6,23,0.42);
+
+    border:
+        1px solid
+        rgba(148,163,184,0.08);
+}
+
+.explanation-item strong {
+
+    display: block;
+
+    color: #cbd5e1;
+
+    font-size: 11px;
+
+    margin-bottom: 3px;
+}
+
+.explanation-item span {
+
+    color: var(--text-dim);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.explanation-item.available {
+
+    border-left:
+        2px solid
+        var(--success);
+}
+
+.explanation-item.available strong {
+
+    color: var(--success);
+}
+
+.explanation-item.warning {
+
+    border-left:
+        2px solid
+        var(--warning);
+}
+
+.explanation-item.warning strong {
+
+    color: var(--warning);
+}
+
+.explanation-item.risk {
+
+    border-left:
+        2px solid
+        var(--danger);
+}
+
+.explanation-item.risk strong {
+
+    color: var(--danger);
+}
+
+.explanation-note {
+
+    margin-top: 12px;
+
+    padding-top: 11px;
+
+    border-top:
+        1px solid
+        rgba(148,163,184,0.08);
+
+    color: var(--text-dim);
+
+    font-size: 10px;
+
+    line-height: 1.55;
+}
+
+.explanation-note strong {
+
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   SESSION SUMMARY
+============================================================ */
+
+.summary {
+
+    margin-top: 14px;
+
+    padding: 15px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(15,23,42,0.9);
+
+    border:
+        1px solid
+        rgba(148,163,184,0.12);
+
+    display: none;
+}
+
+.summary.visible {
+
+    display: block;
+}
+
+.summary-title {
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    margin-bottom: 12px;
+}
+
+.summary-status {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+.summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+.summary-item {
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(2,6,23,0.5);
+}
+
+.summary-item span {
+
+    display: block;
+
+    color: var(--text-dim);
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+}
+
+.summary-item strong {
+
+    font-size: 13px;
+}
+
+.summary-note {
+
+    margin-top: 12px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.interrupted {
+
+    border-color:
+        rgba(251,191,36,0.25);
+
+    background:
+        rgba(120,53,15,0.12);
+}
+
+.interrupted .summary-status {
+
+    color: var(--warning);
+}
+
+.complete {
+
+    border-color:
+        rgba(34,197,94,0.25);
+
+    background:
+        rgba(20,83,45,0.12);
+}
+
+.complete .summary-status {
+
+    color: var(--success);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+footer {
+
+    text-align: center;
+
+    padding: 22px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.07);
+
+    color: #475569;
+
+    font-size: 10px;
+
+    letter-spacing: 0.2px;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .dashboard {
+
+        grid-template-columns: 1fr;
+    }
+
+    .signals {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .container {
+
+        width:
+            min(94%, 520px);
+    }
+
+    .hero {
+
+        padding-top: 42px;
+    }
+
+    .hero h1 {
+
+        font-size: 42px;
+    }
+
+    .controls {
+
+        flex-direction: column;
+    }
+
+    .signals {
+
+        grid-template-columns: 1fr;
+    }
+
+    .signal:last-child {
+
+        grid-column: auto;
+    }
+
+    .trust-ring {
+
+        width: 175px;
+        height: 175px;
+    }
+
+    .trust-score {
+
+        font-size: 46px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+    <div class="logo">
+        Veri<span>Stream</span> AI
+    </div>
+
+    <div class="status">
+
+        <div class="status-dot"></div>
+
+        System Online
+
+    </div>
+
+</header>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-eyebrow">
+        MULTI-SIGNAL AI VERIFICATION
+    </div>
+
+    <h1>
+
+        Can You Trust<br>
+
+        <span>What You See?</span>
+
+    </h1>
+
+    <p>
+
+        VeriStream AI analyzes multiple real-time signals
+        to estimate whether a remote video interaction is
+        genuine, live, and potentially manipulated.
+
+    </p>
+
+</section>
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<section class="dashboard">
+
+<!-- =========================================================
+     LEFT CARD
+========================================================= -->
+
+<div class="card">
+
+    <div class="card-header">
+
+        <div>
+
+            <div class="card-title">
+                Live Verification
+            </div>
+
+            <div class="card-subtitle">
+                Live camera & audio signal analysis
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SESSION -->
+
+    <div class="session-info">
+
+        <span
+            class="session-state"
+            id="sessionState">
+
+            No Active Session
+
+        </span>
+
+        <span
+            class="session-id"
+            id="sessionId">
+
+            --
+
+        </span>
+
+    </div>
+
+    <!-- CAMERA -->
+
+    <div class="camera-wrapper">
+
+        <video
+            id="video"
+            autoplay
+            playsinline
+            muted>
+        </video>
+
+        <canvas
+            id="canvas">
+        </canvas>
+
+        <div
+            class="camera-message"
+            id="cameraMessage">
+
+            Camera inactive
+
+        </div>
+
+        <div class="camera-overlay">
+
+            <div class="scan-line"></div>
+
+            <div class="corner tl"></div>
+
+            <div class="corner tr"></div>
+
+            <div class="corner bl"></div>
+
+            <div class="corner br"></div>
+
+        </div>
+
+    </div>
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+        <button
+            id="startButton"
+            class="primary-btn"
+            onclick="startCamera()">
+
+            Start Verification
+
+        </button>
+
+        <button
+            id="stopButton"
+            class="secondary-btn"
+            onclick="stopCamera()"
+            disabled>
+
+            Stop Verification
+
+        </button>
+
+    </div>
+
+    <!-- SESSION SUMMARY -->
+
+    <div
+        class="summary"
+        id="summaryPanel">
+
+        <div class="summary-title">
+
+            Verification Summary
+
+        </div>
+
+        <div
+            class="summary-status"
+            id="summaryStatus">
+
+            --
+
+        </div>
+
+        <div class="summary-grid">
+
+            <div class="summary-item">
+
+                <span>
+                    Trust Score
+                </span>
+
+                <strong id="summaryScore">
+                    --
+                </strong>
+
+            </div>
+
+            <div class="summary-item">
+
+                <span>
+                    Risk Level
+                </span>
+
+                <strong id="summaryRisk">
+                    --
+                </strong>
+
+            </div>
+
+            <div class="summary-item">
+
+                <span>
+                    Signal Coverage
+                </span>
+
+                <strong id="summaryCoverage">
+                    --
+                </strong>
+
+            </div>
+
+            <div class="summary-item">
+
+                <span>
+                    Session
+                </span>
+
+                <strong id="summarySession">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div
+            class="summary-note"
+            id="summaryNote">
+
+            --
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+     RIGHT CARD
+========================================================= -->
+
+<div class="card">
+
+    <div class="card-header">
+
+        <div>
+
+            <div class="card-title">
+                Identity Trust
+            </div>
+
+            <div class="card-subtitle">
+                Explainable multi-signal assessment
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TRUST SCORE -->
+
+    <div class="trust-section">
+
+        <div
+            class="trust-ring"
+            id="trustRing">
+
+            <div class="trust-content">
+
+                <div
+                    class="trust-score"
+                    id="trustScore">
+
+                    --
+
+                </div>
+
+                <div class="trust-percent">
+
+                    / 100
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div
+            class="trust-label"
+            id="trustLabel">
+
+            Preliminary Trust Score
+
+        </div>
+
+        <div
+            class="risk-badge"
+            id="riskBadge">
+
+            Awaiting Analysis
+
+        </div>
+
+        <div
+            class="coverage"
+            id="coverageText">
+
+            Signal Coverage: --
+
+        </div>
+
+    </div>
+
+    <!-- SIGNALS -->
+
+    <div class="signals">
+
+        <!-- FACE -->
+
+        <div class="signal">
+
+            <div class="signal-top">
+
+                <span class="signal-name">
+                    Face Presence
+                </span>
+
+                <span
+                    class="signal-value"
+                    id="faceValue">
+
+                    --
+
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="faceBar">
+                </div>
+
+            </div>
+
+            <div
+                class="signal-status"
+                id="faceStatus">
+
+                Waiting for camera
+
+            </div>
+
+        </div>
+
+        <!-- LIVENESS -->
+
+        <div class="signal">
+
+            <div class="signal-top">
+
+                <span class="signal-name">
+                    Liveness
+                </span>
+
+                <span
+                    class="signal-value"
+                    id="livenessValue">
+
+                    --
+
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="livenessBar">
+                </div>
+
+            </div>
+
+            <div
+                class="signal-status"
+                id="livenessStatus">
+
+                Waiting for analysis
+
+            </div>
+
+        </div>
+
+        <!-- rPPG -->
+
+        <div class="signal">
+
+            <div class="signal-top">
+
+                <span class="signal-name">
+                    rPPG Confidence
+                </span>
+
+                <span
+                    class="signal-value"
+                    id="rppgValue">
+
+                    --
+
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="rppgBar">
+                </div>
+
+            </div>
+
+            <div
+                class="signal-status"
+                id="rppgStatus">
+
+                Collecting physiological signal
+
+            </div>
+
+        </div>
+
+        <!-- AUDIO VIDEO -->
+
+        <div class="signal">
+
+            <div class="signal-top">
+
+                <span class="signal-name">
+                    Audio-Video Activity
+                </span>
+
+                <span
+                    class="signal-value"
+                    id="avValue">
+
+                    --
+
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="avBar">
+                </div>
+
+            </div>
+
+            <div
+                class="signal-status"
+                id="avStatus">
+
+                Waiting for microphone
+
+            </div>
+
+        </div>
+
+        <!-- DEEPFAKE -->
+
+        <div class="signal">
+
+            <div class="signal-top">
+
+                <span class="signal-name">
+                    Deepfake Risk
+                </span>
+
+                <span
+                    class="signal-value"
+                    id="deepfakeValue">
+
+                    --
+
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="deepfakeBar">
+                </div>
+
+            </div>
+
+            <div
+                class="signal-status"
+                id="deepfakeStatus">
+
+                Waiting for AI model
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================================
+         EXPLAINABLE REPORT
+    ====================================================== -->
+
+    <div class="explanation">
+
+        <div class="explanation-title">
+
+            Why This Score?
+
+        </div>
+
+        <div
+            id="explanationSignals"
+            class="explanation-signals">
+
+            <div class="explanation-item warning">
+
+                <strong>
+                    ⚠ Awaiting verification
+                </strong>
+
+                <span>
+
+                    Start verification to begin
+                    analyzing live identity signals.
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="explanation-note">
+
+            <strong>Important:</strong>
+
+            The Trust Score is a decision-support estimate
+            based on available signals. It does not prove
+            identity or guarantee that a video is genuine.
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+
+    VeriStream AI • Explainable Multi-Signal Identity Trust
+
+</footer>
+
+<script>
+
+/* ============================================================
+   GLOBAL STATE
+============================================================ */
+
+let stream = null;
+
+let analysisInterval = null;
+
+let audioContext = null;
+
+let analyser = null;
+
+let microphoneSource = null;
+
+let audioData = null;
+
+let latestAudioActivity = 0;
+
+let latestAVSyncScore = null;
+
+let requestInProgress = false;
+
+let verificationActive = false;
+
+let currentSessionId = null;
+
+let latestAnalysis = null;
+
+/* ============================================================
+   START VERIFICATION
+============================================================ */
+
+async function startCamera() {
+
+    try {
+
+        resetDashboard();
+
+        hideSummary();
+
+        const sessionResponse =
+            await fetch(
+                "/api/session/start",
+                {
+                    method: "POST"
+                }
+            );
+
+        if (!sessionResponse.ok) {
+
+            throw new Error(
+                "Unable to start verification session."
+            );
+
+        }
+
+        const sessionData =
+            await sessionResponse.json();
+
+        if (
+            sessionData.status !== "success"
+        ) {
+
+            throw new Error(
+                sessionData.message ||
+                "Session creation failed."
+            );
+
+        }
+
+        currentSessionId =
+            sessionData.session_id;
+
+        document.getElementById(
+            "sessionId"
+        ).innerText =
+            currentSessionId;
+
+        document.getElementById(
+            "sessionState"
+        ).innerText =
+            "Session Active";
+
+        latestAVSyncScore = null;
+
+        latestAudioActivity = 0;
+
+        latestAnalysis = null;
+
+        stream =
+            await navigator.mediaDevices
+                .getUserMedia({
+
+                    video: {
+                        width: 640,
+                        height: 480
+                    },
+
+                    audio: true
+
+                });
+
+        const video =
+            document.getElementById(
+                "video"
+            );
+
+        video.srcObject =
+            stream;
+
+        document.getElementById(
+            "cameraMessage"
+        ).style.display =
+            "none";
+
+        document.getElementById(
+            "startButton"
+        ).disabled =
+            true;
+
+        document.getElementById(
+            "stopButton"
+        ).disabled =
+            false;
+
+        verificationActive = true;
+
+        await video.play();
+
+        startAudioAnalysis();
+
+        startAnalysis();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Verification start error:",
+            error
+        );
+
+        verificationActive = false;
+
+        if (stream) {
+
+            stream
+                .getTracks()
+                .forEach(
+                    track =>
+                        track.stop()
+                );
+
+            stream = null;
+
+        }
+
+        if (currentSessionId) {
+
+            try {
+
+                await fetch(
+                    "/api/session/end",
+                    {
+                        method: "POST"
+                    }
+                );
+
+            }
+
+            catch (sessionError) {
+
+                console.error(
+                    "Session cleanup error:",
+                    sessionError
+                );
+
+            }
+
+        }
+
+        currentSessionId = null;
+
+        document.getElementById(
+            "sessionId"
+        ).innerText =
+            "--";
+
+        document.getElementById(
+            "sessionState"
+        ).innerText =
+            "No Active Session";
+
+        alert(
+            "Unable to start verification. Please allow camera and microphone permissions."
+        );
+
+    }
+
+}
+
+/* ============================================================
+   AUDIO ANALYSIS
+============================================================ */
+
+async function startAudioAnalysis() {
+
+    try {
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+        analyser =
+            audioContext.createAnalyser();
+
+        analyser.fftSize = 256;
+
+        audioData =
+            new Uint8Array(
+                analyser.frequencyBinCount
+            );
+
+        microphoneSource =
+            audioContext
+                .createMediaStreamSource(
+                    stream
+                );
+
+        microphoneSource.connect(
+            analyser
+        );
+
+        monitorAudio();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Audio analysis error:",
+            error
+        );
+
+    }
+
+}
+
+/* ============================================================
+   MONITOR AUDIO
+============================================================ */
+
+function monitorAudio() {
+
+    if (
+        !analyser ||
+        !verificationActive
+    ) {
+
+        return;
+
+    }
+
+    analyser.getByteTimeDomainData(
+        audioData
+    );
+
+    let sum = 0;
+
+    for (
+        let i = 0;
+        i < audioData.length;
+        i++
+    ) {
+
+        const value =
+            (
+                audioData[i] - 128
+            ) / 128;
+
+        sum +=
+            value * value;
+
+    }
+
+    const rms =
+        Math.sqrt(
+            sum /
+            audioData.length
+        );
+
+    latestAudioActivity =
+        Math.min(
+            rms * 500,
+            100
+        );
+
+    requestAnimationFrame(
+        monitorAudio
+    );
+
+}
+
+/* ============================================================
+   STOP VERIFICATION
+============================================================ */
+
+async function stopCamera() {
+
+    verificationActive = false;
+
+    if (analysisInterval) {
+
+        clearInterval(
+            analysisInterval
+        );
+
+        analysisInterval = null;
+
+    }
+
+    if (stream) {
+
+        stream
+            .getTracks()
+            .forEach(
+                track =>
+                    track.stop()
+            );
+
+        stream = null;
+
+    }
+
+    if (microphoneSource) {
+
+        try {
+
+            microphoneSource.disconnect();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+        microphoneSource = null;
+
+    }
+
+    if (audioContext) {
+
+        try {
+
+            await audioContext.close();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+        audioContext = null;
+
+    }
+
+    analyser = null;
+
+    audioData = null;
+
+    latestAudioActivity = 0;
+
+    latestAVSyncScore = null;
+
+    requestInProgress = false;
+
+    const video =
+        document.getElementById(
+            "video"
+        );
+
+    video.pause();
+
+    video.srcObject = null;
+
+    document.getElementById(
+        "cameraMessage"
+    ).style.display =
+        "flex";
+
+    const endingSessionId =
+        currentSessionId;
+
+    /* --------------------------------------------------------
+       Ask backend for final session result
+    -------------------------------------------------------- */
+
+    let finalSession = null;
+
+    if (endingSessionId) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/session/end",
+                    {
+                        method: "POST"
+                    }
+                );
+
+            if (response.ok) {
+
+                const data =
+                    await response.json();
+
+                finalSession =
+                    data.final_result;
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Session end error:",
+                error
+            );
+
+        }
+
+    }
+
+    showVerificationSummary(
+        finalSession,
+        endingSessionId
+    );
+
+    currentSessionId = null;
+
+    document.getElementById(
+        "sessionState"
+    ).innerText =
+        "Session Ended";
+
+    document.getElementById(
+        "sessionId"
+    ).innerText =
+        endingSessionId || "--";
+
+    document.getElementById(
+        "startButton"
+    ).disabled =
+        false;
+
+    document.getElementById(
+        "stopButton"
+    ).disabled =
+        true;
+
+}
+
+/* ============================================================
+   START ANALYSIS
+============================================================ */
+
+function startAnalysis() {
+
+    if (analysisInterval) {
+
+        clearInterval(
+            analysisInterval
+        );
+
+    }
+
+    analysisInterval =
+        setInterval(
+            sendFrameToBackend,
+            100
+        );
+
+}
+
+/* ============================================================
+   SEND FRAME
+============================================================ */
+
+async function sendFrameToBackend() {
+
+    if (
+        !verificationActive ||
+        !stream ||
+        requestInProgress ||
+        !currentSessionId
+    ) {
+
+        return;
+
+    }
+
+    const video =
+        document.getElementById(
+            "video"
+        );
+
+    if (
+        video.readyState <
+        HTMLMediaElement.HAVE_CURRENT_DATA
+    ) {
+
+        return;
+
+    }
+
+    requestInProgress = true;
+
+    const canvas =
+        document.getElementById(
+            "canvas"
+        );
+
+    canvas.width =
+        video.videoWidth || 640;
+
+    canvas.height =
+        video.videoHeight || 480;
+
+    const context =
+        canvas.getContext("2d");
+
+    context.save();
+
+    context.translate(
+        canvas.width,
+        0
+    );
+
+    context.scale(
+        -1,
+        1
+    );
+
+    context.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    context.restore();
+
+    canvas.toBlob(
+
+        async function(blob) {
+
+            if (!blob) {
+
+                requestInProgress = false;
+
+                return;
+
+            }
+
+            const formData =
+                new FormData();
+
+            formData.append(
+                "frame",
+                blob,
+                "frame.jpg"
+            );
+
+            formData.append(
+                "session_id",
+                currentSessionId
+            );
+
+            if (
+                latestAVSyncScore !== null
+            ) {
+
+                formData.append(
+                    "av_sync_score",
+                    latestAVSyncScore
+                );
+
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/analyze",
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Backend returned " +
+                        response.status
+                    );
+
+                }
+
+                const data =
+                    await response.json();
+
+                if (!verificationActive) {
+
+                    return;
+
+                }
+
+                if (
+                    data.session_id &&
+                    data.session_id !==
+                    currentSessionId
+                ) {
+
+                    return;
+
+                }
+
+                if (
+                    data.status === "success"
+                ) {
+
+                    latestAnalysis =
+                        data.analysis;
+
+                    updateDashboard(
+                        data.analysis
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Analysis error:",
+                    error
+                );
+
+            }
+
+            finally {
+
+                requestInProgress = false;
+
+            }
+
+        },
+
+        "image/jpeg",
+
+        0.8
+
+    );
+
+}
+
+/* ============================================================
+   VISUAL ACTIVITY
+============================================================ */
+
+function calculateMouthMovement(
+    liveness
+) {
+
+    if (!liveness) {
+
+        return 0;
+
+    }
+
+    const movement =
+        Number(
+            liveness.movement_amount
+        );
+
+    if (
+        !Number.isFinite(
+            movement
+        )
+    ) {
+
+        return 0;
+
+    }
+
+    return Math.min(
+        movement * 5000,
+        100
+    );
+
+}
+
+/* ============================================================
+   AUDIO-VIDEO ACTIVITY
+============================================================ */
+
+function calculateAVSync(
+    visualActivity
+) {
+
+    const audio =
+        latestAudioActivity;
+
+    if (
+        !Number.isFinite(audio)
+    ) {
+
+        return null;
+
+    }
+
+    const difference =
+        Math.abs(
+            visualActivity -
+            audio
+        );
+
+    const score =
+        Math.max(
+            0,
+            100 - difference
+        );
+
+    return Math.round(score);
+
+}
+
+/* ============================================================
+   UPDATE DASHBOARD
+============================================================ */
+
+function updateDashboard(
+    analysis
+) {
+
+    if (!analysis) {
+
+        return;
+
+    }
+
+    /* --------------------------------------------------------
+       FACE
+    -------------------------------------------------------- */
+
+    const face =
+        analysis.face || {};
+
+    const faceDetected =
+        face.face_detected === true;
+
+    const faceScore =
+        faceDetected
+            ? 100
+            : 0;
+
+    updateSignal(
+        "face",
+        faceScore
+    );
+
+    document.getElementById(
+        "faceStatus"
+    ).innerText =
+        faceDetected
+            ? "Face detected"
+            : "No face detected";
+
+    /* --------------------------------------------------------
+       LIVENESS
+    -------------------------------------------------------- */
+
+    const liveness =
+        analysis.liveness || {};
+
+    const livenessScore =
+        Number(
+            liveness.liveness_score
+        );
+
+    if (
+        Number.isFinite(
+            livenessScore
+        )
+    ) {
+
+        updateSignal(
+            "liveness",
+            livenessScore
+        );
+
+    }
+
+    let livenessMessage =
+        "Analyzing live behavior";
+
+    if (
+        liveness.blink_count >= 1
+    ) {
+
+        livenessMessage =
+            "Blink detected";
+
+    }
+
+    if (
+        liveness.movement_frames >= 3
+    ) {
+
+        livenessMessage =
+            "Natural head movement detected";
+
+    }
+
+    document.getElementById(
+        "livenessStatus"
+    ).innerText =
+        livenessMessage;
+
+    /* --------------------------------------------------------
+       rPPG
+    -------------------------------------------------------- */
+
+    const rppg =
+        analysis.rppg || {};
+
+    const rppgConfidence =
+        Number(
+            rppg.confidence
+        );
+
+    if (
+        rppg.rppg_available === true
+    ) {
+
+        updateSignal(
+            "rppg",
+            rppgConfidence
+        );
+
+        document.getElementById(
+            "rppgStatus"
+        ).innerText =
+            rppg.heart_rate
+                ? `Signal detected • HR ${rppg.heart_rate} BPM`
+                : "Physiological signal detected";
+
+    }
+
+    else {
+
+        document.getElementById(
+            "rppgValue"
+        ).innerText =
+            "--";
+
+        document.getElementById(
+            "rppgBar"
+        ).style.width =
+            "0%";
+
+        const rppgSamples = Number(rppg.samples || 0);
+
+        if (rppgSamples < 150) {
+            document.getElementById("rppgStatus").innerText =
+                `Collecting signal (${rppgSamples}/150 samples)`;
+        } else {
+            document.getElementById("rppgStatus").innerText =
+                "Low signal / insufficient confidence";
+        }
+
+    }
+
+    /* --------------------------------------------------------
+       AUDIO VIDEO
+    -------------------------------------------------------- */
+
+    const visualActivity =
+        calculateMouthMovement(
+            liveness
+        );
+
+    const syncScore =
+        calculateAVSync(
+            visualActivity
+        );
+
+    if (
+        syncScore !== null
+    ) {
+
+        latestAVSyncScore =
+            syncScore;
+
+        updateSignal(
+            "av",
+            syncScore
+        );
+
+        document.getElementById(
+            "avStatus"
+        ).innerText =
+            "Activity alignment analyzed";
+
+    }
+
+    /* --------------------------------------------------------
+       DEEPFAKE
+    -------------------------------------------------------- */
+
+    const deepfake =
+        analysis.deepfake || {};
+
+    if (
+        deepfake.deepfake_risk !== null &&
+        deepfake.deepfake_risk !== undefined
+    ) {
+
+        const fakeRisk =
+            Number(
+                deepfake.deepfake_risk
+            );
+
+        updateSignal(
+            "deepfake",
+            fakeRisk
+        );
+
+        document.getElementById(
+            "deepfakeStatus"
+        ).innerText =
+
+            deepfake.prediction ===
+            "likely_real"
+
+                ? "Low model-estimated risk"
+
+                : "Potential manipulation detected";
+
+    }
+
+    /* --------------------------------------------------------
+       TRUST
+    -------------------------------------------------------- */
+
+    const trust =
+        analysis.trust;
+
+    if (
+        trust &&
+        Number.isFinite(
+            Number(trust.score)
+        )
+    ) {
+
+        updateTrustScore(
+            Number(trust.score),
+            trust
+        );
+
+    }
+
+    /* --------------------------------------------------------
+       EXPLANATION
+    -------------------------------------------------------- */
+
+    updateExplanation(
+        analysis
+    );
+
+}
+
+/* ============================================================
+   UPDATE SIGNAL
+============================================================ */
+
+function updateSignal(
+    name,
+    value
+) {
+
+    if (
+        !Number.isFinite(
+            Number(value)
+        )
+    ) {
+
+        return;
+
+    }
+
+    const score =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Number(value)
+            )
+        );
+
+    const valueElement =
+        document.getElementById(
+            name + "Value"
+        );
+
+    const barElement =
+        document.getElementById(
+            name + "Bar"
+        );
+
+    if (valueElement) {
+
+        valueElement.innerText =
+            Math.round(score) + "%";
+
+    }
+
+    if (barElement) {
+
+        barElement.style.width =
+            score + "%";
+
+    }
+
+}
+
+/* ============================================================
+   TRUST SCORE
+============================================================ */
+
+function updateTrustScore(
+    score,
+    trust
+) {
+
+    score =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Math.round(score)
+            )
+        );
+
+    document.getElementById(
+        "trustScore"
+    ).innerText =
+        score;
+
+    const ring =
+        document.getElementById(
+            "trustRing"
+        );
+
+    const degrees =
+        score * 3.6;
+
+    ring.style.background =
+
+        `conic-gradient(
+            #38bdf8 0deg,
+            #38bdf8 ${degrees}deg,
+            rgba(51,65,85,0.4) ${degrees}deg
+        )`;
+
+    const riskBadge =
+        document.getElementById(
+            "riskBadge"
+        );
+
+    let risk =
+
+        trust &&
+        trust.risk_level
+
+            ? trust.risk_level
+
+            : getRiskLevel(score);
+
+    risk =
+        risk.toUpperCase();
+
+    if (
+        trust &&
+        trust.status === "complete"
+    ) {
+
+        riskBadge.innerText =
+            risk;
+
+    }
+
+    else {
+
+        riskBadge.innerText =
+            risk +
+            " • PRELIMINARY";
+
+    }
+
+    document.getElementById(
+        "trustLabel"
+    ).innerText =
+
+        trust &&
+        trust.status === "complete"
+
+            ? "Trust Score"
+
+            : "Preliminary Trust Score";
+
+    const coverage =
+
+        trust &&
+        Number.isFinite(
+            Number(trust.coverage)
+        )
+
+            ? Number(trust.coverage)
+
+            : null;
+
+    document.getElementById(
+        "coverageText"
+    ).innerText =
+
+        coverage !== null
+
+            ? `Signal Coverage: ${Math.round(coverage)}%`
+
+            : "Signal Coverage: --";
+
+}
+
+/* ============================================================
+   RISK LEVEL
+============================================================ */
+
+function getRiskLevel(
+    score
+) {
+
+    if (score >= 80) {
+
+        return "LOW RISK";
+
+    }
+
+    if (score >= 50) {
+
+        return "MEDIUM RISK";
+
+    }
+
+    return "HIGH RISK";
+
+}
+
+/* ============================================================
+   EXPLAINABLE TRUST REPORT
+============================================================ */
+
+function updateExplanation(
+    analysis
+) {
+
+    const container =
+        document.getElementById(
+            "explanationSignals"
+        );
+
+    if (!container) {
+
+        return;
+
+    }
+
+    if (!analysis) {
+
+        container.innerHTML = `
+
+            <div class="explanation-item warning">
+
+                <strong>
+                    ⚠ Waiting for analysis
+                </strong>
+
+                <span>
+                    Start verification to begin
+                    analyzing identity signals.
+                </span>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const face =
+        analysis.face || {};
+
+    const liveness =
+        analysis.liveness || {};
+
+    const rppg =
+        analysis.rppg || {};
+
+    const deepfake =
+        analysis.deepfake || {};
+
+    const trust =
+        analysis.trust || {};
+
+    const items = [];
+
+    /* --------------------------------------------------------
+       TRUST SUMMARY
+    -------------------------------------------------------- */
+
+    if (
+        Number.isFinite(
+            Number(trust.score)
+        )
+    ) {
+
+        const score =
+            Math.round(
+                Number(trust.score)
+            );
+
+        const coverage =
+            Math.round(
+                Number(
+                    trust.coverage || 0
+                )
+            );
+
+        const status =
+            trust.status === "complete"
+
+                ? "All configured signals are available."
+
+                : "Verification is still preliminary.";
+
+        items.push(`
+
+            <div class="explanation-item">
+
+                <strong>
+                    Trust Score: ${score}/100
+                </strong>
+
+                <span>
+                    ${status}
+                    Current signal coverage:
+                    ${coverage}%.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    /* --------------------------------------------------------
+       FACE
+    -------------------------------------------------------- */
+
+    if (
+        face.face_detected === true
+    ) {
+
+        items.push(`
+
+            <div class="explanation-item available">
+
+                <strong>
+                    ✓ Face Presence
+                </strong>
+
+                <span>
+                    A face was detected in the
+                    verification frame.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    else {
+
+        items.push(`
+
+            <div class="explanation-item warning">
+
+                <strong>
+                    ⚠ Face Presence
+                </strong>
+
+                <span>
+                    No face was detected.
+                    Face presence is contributing
+                    little or no positive evidence.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    /* --------------------------------------------------------
+       LIVENESS
+    -------------------------------------------------------- */
+
+    const blinkCount =
+        Number(
+            liveness.blink_count || 0
+        );
+
+    const movementFrames =
+        Number(
+            liveness.movement_frames || 0
+        );
+
+    const livenessScore =
+        Number(
+            liveness.liveness_score
+        );
+
+    if (
+        Number.isFinite(
+            livenessScore
+        )
+    ) {
+
+        let livenessMessage =
+            "Liveness behavior is being analyzed.";
+
+        if (
+            blinkCount >= 1 &&
+            movementFrames >= 3
+        ) {
+
+            livenessMessage =
+                "Blink and natural head movement were detected.";
+
+        }
+
+        else if (
+            blinkCount >= 1
+        ) {
+
+            livenessMessage =
+                "Blink behavior was detected.";
+
+        }
+
+        else if (
+            movementFrames >= 1
+        ) {
+
+            livenessMessage =
+                "Head movement was detected.";
+
+        }
+
+        items.push(`
+
+            <div class="explanation-item available">
+
+                <strong>
+                    ✓ Liveness
+                </strong>
+
+                <span>
+                    ${livenessMessage}
+                    Liveness score:
+                    ${Math.round(livenessScore)}/100.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    /* --------------------------------------------------------
+       rPPG
+    -------------------------------------------------------- */
+
+    if (
+        rppg.rppg_available === true
+    ) {
+
+        const confidence =
+            Number(
+                rppg.confidence || 0
+            );
+
+        const heartRate =
+            rppg.heart_rate;
+
+        let rppgMessage =
+
+            `A physiological signal was detected with ${Math.round(confidence)}% confidence.`;
+
+        if (heartRate) {
+
+            rppgMessage +=
+
+                ` Estimated heart rate: ${heartRate} BPM.`;
+
+        }
+
+        items.push(`
+
+            <div class="explanation-item available">
+
+                <strong>
+                    ✓ rPPG
+                </strong>
+
+                <span>
+                    ${rppgMessage}
+                    This is supporting physiological
+                    evidence, not proof of a live human.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    else {
+
+        const samples =
+            Number(
+                rppg.samples || 0
+            );
+
+        items.push(`
+
+            <div class="explanation-item warning">
+
+                <strong>
+                    ⚠ rPPG
+                </strong>
+
+                <span>
+                    ${samples < 150
+                        ? `Physiological signal is still being collected. ${samples}/150 samples available.`
+                        : `Enough samples were collected (${samples}/150), but the physiological signal did not reach the confidence threshold required for a usable rPPG result.`}
+                    This is supporting physiological evidence,
+                    not proof of a live human.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    /* --------------------------------------------------------
+       AUDIO VIDEO
+    -------------------------------------------------------- */
+
+    const avScore =
+        latestAVSyncScore;
+
+    if (
+        avScore !== null &&
+        Number.isFinite(
+            Number(avScore)
+        )
+    ) {
+
+        items.push(`
+
+            <div class="explanation-item available">
+
+                <strong>
+                    ✓ Audio-Video Activity
+                </strong>
+
+                <span>
+                    Activity alignment score:
+                    ${Math.round(Number(avScore))}/100.
+                    This is supporting activity evidence,
+                    not full phoneme-level lip-sync verification.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    else {
+
+        items.push(`
+
+            <div class="explanation-item warning">
+
+                <strong>
+                    ⚠ Audio-Video Activity
+                </strong>
+
+                <span>
+                    Waiting for usable audio-video
+                    activity data.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    /* --------------------------------------------------------
+       DEEPFAKE
+    -------------------------------------------------------- */
+
+    if (
+        deepfake.deepfake_risk !== null &&
+        deepfake.deepfake_risk !== undefined
+    ) {
+
+        const fakeRisk =
+            Number(
+                deepfake.deepfake_risk
+            );
+
+        const prediction =
+            deepfake.prediction;
+
+        if (
+            prediction ===
+            "likely_real"
+        ) {
+
+            items.push(`
+
+                <div class="explanation-item available">
+
+                    <strong>
+                        ✓ Deepfake Analysis
+                    </strong>
+
+                    <span>
+                        The pretrained model currently
+                        estimates ${Math.round(fakeRisk)}%
+                        manipulation risk.
+                        Result: low model-estimated risk.
+                        This is supporting evidence and does not
+                        guarantee that the video is genuine.
+                    </span>
+
+                </div>
+
+            `);
+
+        }
+
+        else {
+
+            items.push(`
+
+                <div class="explanation-item risk">
+
+                    <strong>
+                        ⚠ Deepfake Analysis
+                    </strong>
+
+                    <span>
+                        The pretrained model currently
+                        estimates ${Math.round(fakeRisk)}%
+                        manipulation risk.
+                        Additional verification may
+                        be appropriate.
+                    </span>
+
+                </div>
+
+            `);
+
+        }
+
+    }
+
+    else {
+
+        items.push(`
+
+            <div class="explanation-item warning">
+
+                <strong>
+                    ⚠ Deepfake Analysis
+                </strong>
+
+                <span>
+                    Waiting for the deepfake
+                    model analysis.
+                </span>
+
+            </div>
+
+        `);
+
+    }
+
+    container.innerHTML =
+        items.join("");
+
+}
+
+/* ============================================================
+   VERIFICATION SUMMARY
+============================================================ */
+
+function showVerificationSummary(
+    analysis,
+    sessionId
+) {
+
+    const panel =
+        document.getElementById(
+            "summaryPanel"
+        );
+
+    const status =
+        document.getElementById(
+            "summaryStatus"
+        );
+
+    const score =
+        document.getElementById(
+            "summaryScore"
+        );
+
+    const risk =
+        document.getElementById(
+            "summaryRisk"
+        );
+
+    const coverage =
+        document.getElementById(
+            "summaryCoverage"
+        );
+
+    const session =
+        document.getElementById(
+            "summarySession"
+        );
+
+    const note =
+        document.getElementById(
+            "summaryNote"
+        );
+
+    panel.classList.remove(
+        "complete",
+        "interrupted"
+    );
+
+    panel.classList.add(
+        "visible"
+    );
+
+    session.innerText =
+
+        sessionId
+
+            ? sessionId.substring(0, 8) + "..."
+
+            : "--";
+
+    if (
+        !analysis ||
+        !analysis.trust
+    ) {
+
+        panel.classList.add(
+            "interrupted"
+        );
+
+        status.innerText =
+            "⚠ VERIFICATION INTERRUPTED";
+
+        score.innerText =
+            "--";
+
+        risk.innerText =
+            "--";
+
+        coverage.innerText =
+            "--";
+
+        note.innerText =
+
+            "The session ended before a usable verification result was produced. Do not treat this session as verified.";
+
+        return;
+
+    }
+
+    const trust =
+        analysis.trust;
+
+    const trustScore =
+        Number(
+            trust.score
+        );
+
+    score.innerText =
+
+        Number.isFinite(
+            trustScore
+        )
+
+            ? `${Math.round(trustScore)} / 100`
+
+            : "--";
+
+    risk.innerText =
+
+        trust.risk_level
+
+            ? trust.risk_level.toUpperCase()
+
+            : "--";
+
+    coverage.innerText =
+
+        Number.isFinite(
+            Number(trust.coverage)
+        )
+
+            ? `${Math.round(
+                Number(trust.coverage)
+            )}%`
+
+            : "--";
+
+    if (
+        trust.status === "complete"
+    ) {
+
+        panel.classList.add(
+            "complete"
+        );
+
+        status.innerText =
+            "✓ VERIFICATION ANALYSIS COMPLETE";
+
+        note.innerText =
+
+            "All configured prototype signals were available when the session ended. The Trust Score is a decision-support estimate, not proof of identity.";
+
+    }
+
+    else {
+
+        panel.classList.add(
+            "interrupted"
+        );
+
+        status.innerText =
+            "⚠ VERIFICATION INTERRUPTED";
+
+        note.innerText =
+
+            "The camera was stopped before all configured signals became available. This result is preliminary and should not be treated as completed identity verification.";
+
+    }
+
+}
+
+/* ============================================================
+   HIDE SUMMARY
+============================================================ */
+
+function hideSummary() {
+
+    const panel =
+        document.getElementById(
+            "summaryPanel"
+        );
+
+    panel.classList.remove(
+        "visible",
+        "complete",
+        "interrupted"
+    );
+
+}
+
+/* ============================================================
+   RESET DASHBOARD
+============================================================ */
+
+function resetDashboard() {
+
+    document.getElementById(
+        "trustScore"
+    ).innerText =
+        "--";
+
+    document.getElementById(
+        "trustLabel"
+    ).innerText =
+        "Preliminary Trust Score";
+
+    document.getElementById(
+        "riskBadge"
+    ).innerText =
+        "Awaiting Analysis";
+
+    document.getElementById(
+        "coverageText"
+    ).innerText =
+        "Signal Coverage: --";
+
+    document.getElementById(
+        "trustRing"
+    ).style.background =
+
+        `conic-gradient(
+            #38bdf8 0deg,
+            #38bdf8 0deg,
+            rgba(51,65,85,0.4) 0deg
+        )`;
+
+    const signals = [
+
+        "face",
+        "liveness",
+        "rppg",
+        "av",
+        "deepfake"
+
+    ];
+
+    signals.forEach(
+        signal => {
+
+            const value =
+                document.getElementById(
+                    signal + "Value"
+                );
+
+            const bar =
+                document.getElementById(
+                    signal + "Bar"
+                );
+
+            if (value) {
+
+                value.innerText =
+                    "--";
+
+            }
+
+            if (bar) {
+
+                bar.style.width =
+                    "0%";
+
+            }
+
+        }
+    );
+
+    document.getElementById(
+        "faceStatus"
+    ).innerText =
+        "Waiting for camera";
+
+    document.getElementById(
+        "livenessStatus"
+    ).innerText =
+        "Waiting for analysis";
+
+    document.getElementById(
+        "rppgStatus"
+    ).innerText =
+        "Collecting physiological signal";
+
+    document.getElementById(
+        "avStatus"
+    ).innerText =
+        "Waiting for microphone";
+
+    document.getElementById(
+        "deepfakeStatus"
+    ).innerText =
+        "Waiting for AI model";
+
+    const explanationSignals =
+        document.getElementById(
+            "explanationSignals"
+        );
+
+    if (explanationSignals) {
+
+        explanationSignals.innerHTML = `
+
+            <div class="explanation-item warning">
+
+                <strong>
+                    ⚠ Awaiting verification
+                </strong>
+
+                <span>
+                    Start verification to analyze
+                    live identity signals.
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
