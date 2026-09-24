@@ -21,6 +21,7 @@ Thumbs.db
 
 # Test videos / local media
 test_videos/
+uploads/
 
 # Logs
 *.log
